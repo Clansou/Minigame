@@ -1,8 +1,8 @@
 // Constants
 const GAME_DURATION = 30; // seconds
-const OBJECT_FALL_SPEED = 2; // pixels per frame
-const OBJECT_SPAWN_DELAY = 600; // milliseconds
-const OBJECT_SPAWN_PROBABILITY = 0.9; // probability of a new object spawning on each frame
+const OBJECT_FALL_SPEED = 1; // pixels per frame
+const OBJECT_SPAWN_DELAY = 800; // milliseconds
+const OBJECT_SPAWN_PROBABILITY = 0.7; // probability of a new object spawning on each frame
 const OBJECT_POINTS = 10; // points awarded for catching a collectible object
 const OBJECT_PENALTY_POINTS = 20; // points deducted for catching a dangerous object
 const OBJECT_SIZE = 50;
