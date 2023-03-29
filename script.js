@@ -1,5 +1,5 @@
 // Constants
-const GAME_DURATION = 30; // seconds
+const GAME_DURATION = 3; // seconds
 const OBJECT_FALL_SPEED = 1; // pixels per frame
 const OBJECT_SPAWN_DELAY = 800; // milliseconds
 const OBJECT_SPAWN_PROBABILITY = 0.7; // probability of a new object spawning on each frame
@@ -22,6 +22,7 @@ let gameTimer = null;
 const scoreEl = document.getElementById('score');
 const bucketEl = document.getElementById('bucket');
 const spawn = document.getElementById("spawn-container")
+const result = document.getElementById("Result")
 const objectsContainerEl = document.getElementById('objects-container');
 
 // Event listeners
@@ -69,9 +70,13 @@ function spawnObject() {
   lastSpawnTime = Date.now();
 }
 
-function updateScore(points) {
-  score += points;
-  scoreEl.textContent = score;
+function updateImage(){
+  if(score>=50){
+    bucketEl.style.backgroundImage="url(image/panier_pomme.png)";
+  }else{
+    console.log("pas cool")
+    bucketEl.style.backgroundImage="url(image/Panier.png)";
+  }
 }
 
 function removeObject(object) {
@@ -91,16 +96,16 @@ function handleObjectFall() {
       // Check for collision with bucket
       if (bucketcollide.bottom >= objcollide.bottom && bucketcollide.top <= objcollide.top) {
         if(bucketcollide.left<=objcollide.left && bucketcollide.right>=objcollide.right){
-          console.log("cool")
           // Deduct score and remove object
-          console.log(scoreEl)
           if(obj.classList.contains("collectible")){
             score += OBJECT_POINTS;
+            
           }
           else{
             score -= OBJECT_PENALTY_POINTS
           }
-          
+
+          updateImage();
           scoreEl.textContent = score;
           objectsContainerEl.removeChild(obj);
         }
@@ -115,9 +120,11 @@ function handleObjectFall() {
 
 function handleGameEnd() {
   clearInterval(gameTimer);
-  alert(`Game over! Your score is ${score}.`);
-  startGame();
+  spawn.style.display="None"
+  result.style.display="Block"
+  generateCode();
 }
+
 
 function updateTimer() {
   const elapsedSeconds = Math.floor((Date.now() - gameStartTime) / 1000);
@@ -131,6 +138,7 @@ function updateTimer() {
 
 function startGame() {
     // Reset game variables
+    updateImage();
     score = 0;
     objects = [];
     lastSpawnTime = 0;
@@ -157,6 +165,36 @@ function startGame() {
     updateTimer();
     }, 1); // frames per second
     }
+
+    
+  function generateCode(){
+    code = ""
+    listcharacter=['A',"B"];
+    for(i=0;i<4;i++){
+      code += listcharacter[Math.floor(Math.random() * listcharacter.length)]
+    }
+    document.getElementById('promocode').textContent=code
+  }
+
+  const wincodes=['AAAA',"BBBB","ABAB","BBAA","BAAA","BBBA","BABA"];
+
+
+  function checkcode(){
+    let win = false
+    let textresultcode = ""
+    wincodes.forEach(wincode =>{
+      if(code == wincode){
+        win = true
+      }
+    }) 
+    const resultcode = document.createElement("p");
+    if(win == true){
+      resultcode.textContent=("you win")
+    }else{
+      resultcode.textContent=("you lose")
+    }
+    result.appendChild(resultcode);
+  }
     
     // Start the game
 startGame();

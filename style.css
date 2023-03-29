@@ -1,3 +1,24 @@
+body{
+  background-image: url(image/background.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+
+#Result{
+  position: absolute;
+  width: 80vw;
+  height: 80vh;
+  top: 10vh;
+  left: 10vw;
+  display: none;
+}
+#promocode{
+  font-size: 36px;
+  text-align: center;
+  vertical-align: middle;
+}
+
 #game-container {
     position: relative;
     width: 90vw;
@@ -30,7 +51,7 @@
     cursor: pointer;
     user-select: none;
     touch-action: none;
-    background-image: url(Panier.png);
+    background-image: url(image/Panier.png);
     background-position: center;
   }
 
@@ -47,13 +68,13 @@
     position: absolute;
     width: 50px;
     height: 50px;
-    background-image: url(pomme.png);
+    background-image: url(image/pomme.png);
     background-position: center;
     background-size: 50px;
   }
   
   .object.dangerous {
-    background-image: url(burger.png);
+    background-image: url(image/burger.png);
     background-size: 80px;
   }
   
